@@ -27,6 +27,8 @@ from NCE.NCECriterion import NCECriterion
 from NCE.NCECriterion import NCESoftmaxLoss
 
 from dataset import ImageFolderInstance
+import warnings
+# warnings.filterwarnings('ignore')
 
 try:
     from apex import amp, optimizers
@@ -66,7 +68,7 @@ def parse_option():
     parser.add_argument('--crop', type=float, default=0.2, help='minimum crop')
 
     # dataset
-    parser.add_argument('--dataset', type=str, default='visda', choices=['visda','imagenet100', 'imagenet'])
+    parser.add_argument('--dataset', type=str, default='visda-T', choices=['visda-S+T','visda-T','imagenet100', 'imagenet'])
 
     # resume
     parser.add_argument('--resume', default='', type=str, metavar='PATH',
@@ -167,8 +169,13 @@ def main():
     # set the data loader
     # data_folder = os.path.join(args.data_folder, 'train')
     ## visda
-    data_folder = os.path.join('/home/xdwang21/DAlib/dsets/visda','validation')
-
+    ##validation
+    if args.dataset=='visda-T':
+        data_folder = os.path.join('/data1/junbao3/xdwang/dsets/visda','validation')
+    elif args.dataset == 'visda-S+T':
+        data_folder = os.path.join('/data1/junbao3/xdwang/dsets/visda','S+T')
+    ## root/class-0/1.png
+    ## root/class-0/2.png
     image_size = 224
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]

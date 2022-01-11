@@ -5,8 +5,7 @@ The pre-training stage:
 
 - For MoCo:
     ```
-    CUDA_VISIBLE_DEVICES=0,1,2,3 python train_moco_ins.py \
-     --batch_size 128 --num_workers 24 --nce_k 16384 --softmax --moco
+    CUDA_VISIBLE_DEVICES=0,1,2,3 python train_moco_ins.py --batch_size 128 --num_workers 24 --nce_k 16384 --softmax --moco
     ```
   
 The linear evaluation stage:
